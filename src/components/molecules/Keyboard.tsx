@@ -6,7 +6,7 @@ const thirdRow = ['ENTER', 'Z', 'X', 'C', 'V', 'B', 'N', 'M', 'DELETE'];
 
 const Keyboard = ({}: KeyboardProps) => {
   return (
-    <div className="mt-14 grid gap-4 rounded-2xl bg-cultured-200 px-5 py-8">
+    <div className="mt-14 grid gap-4 rounded-2xl bg-cultured-200 px-5 py-8 dark:bg-space-cadet-100">
       <div className="flex items-center justify-center space-x-2">
         {firstRow.map(value => (
           <Keycap value={value} />
@@ -17,7 +17,7 @@ const Keyboard = ({}: KeyboardProps) => {
           <Keycap value={value} />
         ))}
       </div>
-      <div className="ml-4 flex items-center justify-start space-x-2">
+      <div className="ml-4 flex items-center justify-center space-x-2">
         {thirdRow.map(value => (
           <Keycap value={value} />
         ))}
