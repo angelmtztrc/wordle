@@ -20,6 +20,9 @@
       "@atoms": ["./components/atoms/index"],
       "@molecules": ["./components/molecules/index"],
       "@organisms": ["./components/organisms/index"],
+      "@hooks": ["./hooks/index"],
+      "@store": ["./store/index"],
+      "@store/*": ["./store/*"],
       "@styles/*": ["./styles/*"]
     }
   },

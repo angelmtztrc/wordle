@@ -1,11 +1,17 @@
-import { Switch } from '@atoms';
 import {
   QuestionMarkCircleIcon,
   ChartSquareBarIcon
 } from '@heroicons/react/solid';
-import { useState } from 'react';
 
-const Header = ({ darkEnabled, setDarkEnabled }: HeaderProps) => {
+import { useRootDispatch, useRootSelector } from '@hooks';
+
+import { Switch } from '@atoms';
+import { toggleDarkMode } from '@store/slices/root.slice';
+
+const Header = ({}: HeaderProps) => {
+  const darkEnabled = useRootSelector(state => state.darkMode);
+  const dispatch = useRootDispatch();
+
   return (
     <header className="mt-10 grid grid-cols-3 rounded-2xl bg-cultured-200 py-4 px-6 dark:bg-space-cadet-100">
       <div className="col-span-1 flex items-center">
@@ -20,7 +26,7 @@ const Header = ({ darkEnabled, setDarkEnabled }: HeaderProps) => {
         <ChartSquareBarIcon className="h-6 w-6 text-[#818181] dark:text-gainsboro" />
         <Switch
           checked={!darkEnabled}
-          onChange={() => setDarkEnabled(!darkEnabled)}
+          onChange={() => dispatch(toggleDarkMode())}
           description="dark/light"
         />
       </div>
@@ -28,9 +34,6 @@ const Header = ({ darkEnabled, setDarkEnabled }: HeaderProps) => {
   );
 };
 
-type HeaderProps = {
-  darkEnabled: boolean;
-  setDarkEnabled: (value: boolean) => void;
-};
+type HeaderProps = {};
 
 export default Header;

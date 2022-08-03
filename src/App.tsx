@@ -2,9 +2,10 @@ import { useState } from 'react';
 import cls from 'classnames';
 
 import { Header, Keyboard, KeyGrid } from '@molecules';
+import { useRootSelector } from '@hooks';
 
 const App = () => {
-  const [darkEnabled, setDarkEnabled] = useState(false);
+  const darkEnabled = useRootSelector(state => state.darkMode);
 
   return (
     <div
@@ -17,7 +18,7 @@ const App = () => {
         className={'flex min-h-screen bg-cultured-100 dark:bg-space-cadet-200'}
       >
         <div className="mx-auto w-full max-w-2xl flex-1">
-          <Header darkEnabled={darkEnabled} setDarkEnabled={setDarkEnabled} />
+          <Header />
           <KeyGrid />
           <Keyboard />
         </div>
