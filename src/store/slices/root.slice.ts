@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { answerValidation } from '@utils/answer-validation.util';
+import { keyboardValidation } from '@utils/keyboard-validation.util';
 import { toast } from 'react-toastify';
 
 type StateProps = {
@@ -12,6 +13,7 @@ type StateProps = {
   answer: string[][];
   currentRow: number;
   validation: Record<string, string>[];
+  keyboardValidation: Record<string, string>;
   isDarkMode: boolean;
 };
 
@@ -27,6 +29,7 @@ const rootSlice = createSlice({
     answer: [[], [], [], [], []],
     currentRow: 0,
     validation: [{}, {}, {}, {}, {}],
+    keyboardValidation: {},
     isDarkMode: true
   } as StateProps,
   reducers: {
@@ -71,6 +74,8 @@ const rootSlice = createSlice({
       });
 
       state.validation[state.currentRow] = validation;
+
+      state.keyboardValidation = keyboardValidation(state.word, state.answer);
 
       const hasWin = Object.values(validation).every(
         value => value === 'right'

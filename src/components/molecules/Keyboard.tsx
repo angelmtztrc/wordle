@@ -8,6 +8,7 @@ import { useRootDispatch, useRootSelector } from '@hooks';
 import { Keycap } from '@atoms';
 import { getDictionary } from '@utils/dictionary.util';
 import { toast } from 'react-toastify';
+import { keyboardValidation } from '@utils/keyboard-validation.util';
 
 const firstRow = ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P'];
 const secondRow = ['A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 'Ñ'];

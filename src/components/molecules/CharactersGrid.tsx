@@ -1,4 +1,5 @@
 import { Fragment } from 'react';
+import { nanoid } from 'nanoid';
 
 import { useRootSelector } from '@hooks';
 
@@ -16,7 +17,7 @@ const CharactersGrid = ({}: CharactersGridProps) => {
         <Fragment key={row}>
           {Array.from({ length: 5 }).map((_, column) => (
             <CharacterBox
-              key={answer[row][column] ?? column}
+              key={`${answer[row][column] ?? column}` + nanoid(5)}
               value={answer[row][column] ?? ''}
               validation={validation[row][column]}
             />
