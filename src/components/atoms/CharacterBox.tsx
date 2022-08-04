@@ -2,11 +2,7 @@ import cls from 'classnames';
 
 import { useRootSelector } from '@hooks';
 
-const CharacterBox = ({ value = '', valueIndex, row }: CharacterBoxProps) => {
-  const validation = useRootSelector(
-    state => state.validation[row][valueIndex]
-  );
-
+const CharacterBox = ({ value = '', validation }: CharacterBoxProps) => {
   return (
     <div
       className={cls(
@@ -16,6 +12,8 @@ const CharacterBox = ({ value = '', valueIndex, row }: CharacterBoxProps) => {
           ? 'bg-old-gold'
           : validation === 'not-found'
           ? 'bg-davys-grey'
+          : !validation && value
+          ? 'border border-slate-500 bg-transparent'
           : 'bg-gainsboro  dark:bg-charcoal',
         'relative col-span-1 flex items-center justify-center rounded-lg  py-4 px-6'
       )}
@@ -30,8 +28,7 @@ const CharacterBox = ({ value = '', valueIndex, row }: CharacterBoxProps) => {
 
 type CharacterBoxProps = {
   value: string;
-  valueIndex: number;
-  row: number;
+  validation?: string;
 };
 
 export default CharacterBox;
