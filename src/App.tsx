@@ -1,11 +1,13 @@
 import { useEffect } from 'react';
 import { ToastContainer } from 'react-toastify';
 import cls from 'classnames';
+import { useTimer } from 'react-timer-hook';
 
-import { openStartGameModal, setWord } from '@store/slices/root.slice';
+import { setWord } from '@store/slices/root.slice';
 
 import { getDictionary } from '@utils/dictionary.util';
 import { getRandom } from '@utils/get-random.util';
+
 import { useRootDispatch, useRootSelector } from '@hooks';
 
 import {
@@ -19,6 +21,13 @@ import {
 const App = () => {
   const isDark = useRootSelector(state => state.isDarkMode);
   const dispatch = useRootDispatch();
+  const time = new Date();
+  time.setSeconds(time.getSeconds() + 300);
+
+  const { minutes, seconds } = useTimer({
+    expiryTimestamp: time,
+    autoStart: true
+  });
 
   useEffect(() => {
     (async function () {
@@ -44,7 +53,7 @@ const App = () => {
           <Keyboard />
         </div>
         <GameStartModal />
-        <StatisticsModal />
+        <StatisticsModal minutes={minutes} seconds={seconds} />
       </div>
       <ToastContainer
         position="top-right"

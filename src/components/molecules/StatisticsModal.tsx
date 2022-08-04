@@ -4,7 +4,7 @@ import { closeStatisticsModal } from '@store/slices/root.slice';
 
 import { Modal } from '@atoms';
 
-const StatisticsModal = ({}: StatisticsModalProps) => {
+const StatisticsModal = ({ minutes, seconds }: StatisticsModalProps) => {
   const isOpen = useRootSelector(state => state.modal === 'statistics');
   const [matches, wins] = useRootSelector(state => [state.matches, state.wins]);
   const [word, hasLose] = useRootSelector(state => [state.word, state.hasLose]);
@@ -39,7 +39,9 @@ const StatisticsModal = ({}: StatisticsModalProps) => {
 
         <div className="text-center font-body dark:text-white">
           <p>Next word in</p>
-          <p className="font-bold">04:10</p>
+          <p className="font-bold">
+            0{minutes}:{seconds}
+          </p>
         </div>
         <button
           onClick={handleClose}
@@ -52,6 +54,9 @@ const StatisticsModal = ({}: StatisticsModalProps) => {
   );
 };
 
-type StatisticsModalProps = {};
+type StatisticsModalProps = {
+  minutes: number;
+  seconds: number;
+};
 
 export default StatisticsModal;
