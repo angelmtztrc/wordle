@@ -3,6 +3,7 @@ import { answerValidation } from '@utils/answer-validation.util';
 
 type StateProps = {
   word: string;
+  modal: 'start-game' | 'statistics' | 'none';
   answer: string[][];
   currentRow: number;
   validation: Record<string, string>[];
@@ -13,6 +14,7 @@ const rootSlice = createSlice({
   name: 'root',
   initialState: {
     word: 'hello',
+    modal: 'none',
     answer: [[], [], [], [], []],
     currentRow: 0,
     validation: [{}, {}, {}, {}, {}],
@@ -41,7 +43,6 @@ const rootSlice = createSlice({
     },
     submitWord: (state: StateProps) => {
       // TODO: validate if is row end
-      // TODO: check if the word is in the dictionary
       // TODO: validate duplicate keys
       // TODO: handle if the user wins
       // TODO: handle if the user loses
@@ -62,6 +63,26 @@ const rootSlice = createSlice({
 
       state.currentRow += 1;
       return state;
+    },
+    openStartGameModal: (state: StateProps) => {
+      state.modal = 'start-game';
+
+      return state;
+    },
+    closeStartGameModal: (state: StateProps) => {
+      state.modal = 'none';
+
+      return state;
+    },
+    openStatisticsModal: (state: StateProps) => {
+      state.modal = 'statistics';
+
+      return state;
+    },
+    closeStatisticsModal: (state: StateProps) => {
+      state.modal = 'none';
+
+      return state;
     }
   }
 });
@@ -71,7 +92,11 @@ export const {
   setWord,
   addKeyOnAnswer,
   removeKeyOnAnswer,
-  submitWord
+  submitWord,
+  openStartGameModal,
+  closeStartGameModal,
+  openStatisticsModal,
+  closeStatisticsModal
 } = rootSlice.actions;
 
 export default rootSlice.reducer;

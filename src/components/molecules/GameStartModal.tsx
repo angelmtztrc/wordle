@@ -1,12 +1,19 @@
-import { useState } from 'react';
+import { useRootDispatch, useRootSelector } from '@hooks';
+
+import { closeStartGameModal } from '@store/slices/root.slice';
 
 import { CharacterBox, Modal } from '@atoms';
 
 const GameStartModal = ({}: GameStartModalProps) => {
-  const [isOpen, setIsOpen] = useState(true);
+  const isOpen = useRootSelector(state => state.modal === 'start-game');
+  const dispatch = useRootDispatch();
+
+  const handleClose = () => {
+    dispatch(closeStartGameModal());
+  };
 
   return (
-    <Modal title="How to play" open={isOpen} onClose={() => setIsOpen(false)}>
+    <Modal title="How to play" open={isOpen} onClose={() => {}}>
       <div className="mt-6 space-y-2 font-body text-base dark:text-white">
         <p>Guess the hidden word in five tries.</p>
         <p>Each try must be five characters length word.</p>
@@ -59,7 +66,10 @@ const GameStartModal = ({}: GameStartModalProps) => {
           New words are generated every five minutes!
         </p>
         <div className="mt-2 flex items-center justify-center">
-          <button className="rounded bg-forest-green px-4 py-2 font-body text-lg font-bold uppercase text-white">
+          <button
+            onClick={handleClose}
+            className="rounded bg-forest-green px-4 py-2 font-body text-lg font-bold uppercase text-white"
+          >
             Play!
           </button>
         </div>

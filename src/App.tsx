@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { ToastContainer } from 'react-toastify';
 import cls from 'classnames';
 
-import { setWord } from '@store/slices/root.slice';
+import { openStartGameModal, setWord } from '@store/slices/root.slice';
 
 import { getDictionary } from '@utils/dictionary.util';
 import { getRandom } from '@utils/get-random.util';
@@ -18,6 +18,7 @@ const App = () => {
     (async function () {
       const words = await getDictionary();
       const randomWord = getRandom<string>(words);
+      dispatch(openStartGameModal());
       dispatch(setWord(randomWord.toUpperCase()));
     })();
   }, []);

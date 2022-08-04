@@ -1,5 +1,7 @@
 import dictionary from '@data/dictionary.txt';
 
+import { parseWord } from './parse-word.util';
+
 export const getDictionary = async (): Promise<string[]> => {
   let values: string[] = [];
   await fetch(dictionary)
@@ -10,7 +12,7 @@ export const getDictionary = async (): Promise<string[]> => {
         .split('\n')
         .filter((word: string) => word.length === WORD_LENGTH_ALLOWED);
 
-      values = words;
+      values = words.map(word => parseWord(word).toUpperCase());
     })
     .catch(err => console.log(err));
 

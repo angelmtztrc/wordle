@@ -13,9 +13,10 @@ const CharactersGrid = ({}: CharactersGridProps) => {
   return (
     <div className="mx-auto mt-20 grid max-w-md grid-cols-5 grid-rows-5 gap-2 px-6">
       {Array.from({ length: 5 }).map((_, row) => (
-        <Fragment>
+        <Fragment key={row}>
           {Array.from({ length: 5 }).map((_, column) => (
             <CharacterBox
+              key={answer[row][column] ?? column}
               value={answer[row][column] ?? ''}
               validation={validation[row][column]}
             />

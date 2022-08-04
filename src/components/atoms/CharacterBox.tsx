@@ -1,7 +1,5 @@
 import cls from 'classnames';
 
-import { useRootSelector } from '@hooks';
-
 const CharacterBox = ({ value = '', validation }: CharacterBoxProps) => {
   return (
     <div
@@ -13,9 +11,9 @@ const CharacterBox = ({ value = '', validation }: CharacterBoxProps) => {
           : validation === 'not-found'
           ? 'bg-davys-grey'
           : !validation && value
-          ? 'border border-slate-500 bg-transparent'
-          : 'bg-gainsboro  dark:bg-charcoal',
-        'relative col-span-1 flex items-center justify-center rounded-lg  py-4 px-6'
+          ? ' border-slate-500 bg-transparent'
+          : 'border-transparent  bg-gainsboro dark:bg-charcoal',
+        'relative col-span-1 flex items-center justify-center rounded-lg  border py-4 px-6'
       )}
     >
       <span className="invisible font-body text-4xl font-bold">A</span>
