@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { ToastContainer } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
 import cls from 'classnames';
 import { useTimer } from 'react-timer-hook';
 
@@ -44,6 +44,7 @@ const App = () => {
         const randomWord = getRandom<string>(words);
         dispatch(restartMatch());
         dispatch(setWord(randomWord.toUpperCase()));
+        toast.info('Nueva palabra generada!');
         restart(time);
       }
     })();

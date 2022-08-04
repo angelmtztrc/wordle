@@ -21,7 +21,7 @@ const Header = ({}: HeaderProps) => {
       <div className="col-span-1 flex items-center">
         <QuestionMarkCircleIcon
           onClick={() => dispatch(openStartGameModal())}
-          className="h-6 w-6 text-[#818181] dark:text-gainsboro"
+          className="h-6 w-6 cursor-pointer text-[#818181] dark:text-gainsboro"
         />
       </div>
       <div className="col-span-1 flex items-center justify-center">
@@ -32,7 +32,7 @@ const Header = ({}: HeaderProps) => {
       <div className="col-span-1 flex items-center justify-end space-x-2">
         <ChartSquareBarIcon
           onClick={() => dispatch(openStatisticsModal())}
-          className="h-6 w-6 text-[#818181] dark:text-gainsboro"
+          className="h-6 w-6 cursor-pointer text-[#818181] dark:text-gainsboro"
         />
         <Switch
           checked={!darkEnabled}
