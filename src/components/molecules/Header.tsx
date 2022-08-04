@@ -6,7 +6,11 @@ import {
 import { useRootDispatch, useRootSelector } from '@hooks';
 
 import { Switch } from '@atoms';
-import { toggleDarkMode } from '@store/slices/root.slice';
+import {
+  openStartGameModal,
+  openStatisticsModal,
+  toggleDarkMode
+} from '@store/slices/root.slice';
 
 const Header = ({}: HeaderProps) => {
   const darkEnabled = useRootSelector(state => state.isDarkMode);
@@ -15,7 +19,10 @@ const Header = ({}: HeaderProps) => {
   return (
     <header className="mt-10 grid grid-cols-3 rounded-2xl bg-cultured-200 py-4 px-6 dark:bg-space-cadet-100">
       <div className="col-span-1 flex items-center">
-        <QuestionMarkCircleIcon className="h-6 w-6 text-[#818181] dark:text-gainsboro" />
+        <QuestionMarkCircleIcon
+          onClick={() => dispatch(openStartGameModal())}
+          className="h-6 w-6 text-[#818181] dark:text-gainsboro"
+        />
       </div>
       <div className="col-span-1 flex items-center justify-center">
         <h1 className="font-body text-4xl font-bold uppercase leading-10 text-space-cadet-200 dark:text-gainsboro">
@@ -23,7 +30,10 @@ const Header = ({}: HeaderProps) => {
         </h1>
       </div>
       <div className="col-span-1 flex items-center justify-end space-x-2">
-        <ChartSquareBarIcon className="h-6 w-6 text-[#818181] dark:text-gainsboro" />
+        <ChartSquareBarIcon
+          onClick={() => dispatch(openStatisticsModal())}
+          className="h-6 w-6 text-[#818181] dark:text-gainsboro"
+        />
         <Switch
           checked={!darkEnabled}
           onChange={() => dispatch(toggleDarkMode())}

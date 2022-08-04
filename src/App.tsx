@@ -3,7 +3,7 @@ import { ToastContainer } from 'react-toastify';
 import cls from 'classnames';
 import { useTimer } from 'react-timer-hook';
 
-import { setWord } from '@store/slices/root.slice';
+import { restartMatch, setWord } from '@store/slices/root.slice';
 
 import { getDictionary } from '@utils/dictionary.util';
 import { getRandom } from '@utils/get-random.util';
@@ -24,7 +24,7 @@ const App = () => {
   const time = new Date();
   time.setSeconds(time.getSeconds() + 300);
 
-  const { minutes, seconds } = useTimer({
+  const { minutes, seconds, restart } = useTimer({
     expiryTimestamp: time,
     autoStart: true
   });
@@ -36,6 +36,18 @@ const App = () => {
       dispatch(setWord(randomWord.toUpperCase()));
     })();
   }, []);
+
+  useEffect(() => {
+    (async function () {
+      if (minutes === 0) {
+        const words = await getDictionary();
+        const randomWord = getRandom<string>(words);
+        dispatch(restartMatch());
+        dispatch(setWord(randomWord.toUpperCase()));
+        restart(time);
+      }
+    })();
+  }, [minutes]);
 
   return (
     <div

@@ -35,6 +35,18 @@ const rootSlice = createSlice({
 
       return state;
     },
+    restartMatch: (state: StateProps) => {
+      state.matches = 0;
+      state.wins = 0;
+      state.word = 'hello';
+      state.modal = 'start-game';
+      state.hasLose = false;
+      state.hasWin = false;
+      state.answer = [[], [], [], [], []];
+      state.currentRow = 0;
+      state.validation = [{}, {}, {}, {}, {}];
+      return state;
+    },
     setWord: (state: StateProps, action: PayloadAction<string>) => {
       state.word = action.payload;
 
@@ -111,6 +123,7 @@ const rootSlice = createSlice({
 
 export const {
   toggleDarkMode,
+  restartMatch,
   setWord,
   addKeyOnAnswer,
   removeKeyOnAnswer,
