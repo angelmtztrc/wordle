@@ -9,7 +9,7 @@ import { Switch } from '@atoms';
 import { toggleDarkMode } from '@store/slices/root.slice';
 
 const Header = ({}: HeaderProps) => {
-  const darkEnabled = useRootSelector(state => state.darkMode);
+  const darkEnabled = useRootSelector(state => state.isDarkMode);
   const dispatch = useRootDispatch();
 
   return (

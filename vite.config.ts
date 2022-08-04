@@ -11,9 +11,11 @@ export default defineConfig({
       '@atoms': path.resolve(__dirname, './src/components/atoms'),
       '@molecules': path.resolve(__dirname, './src/components/molecules'),
       '@organisms': path.resolve(__dirname, './src/components/organisms'),
+      '@data': path.resolve(__dirname, './src/data'),
       '@hooks': path.resolve(__dirname, './src/hooks'),
       '@store': path.resolve(__dirname, './src/store'),
-      '@styles': path.resolve(__dirname, './src/styles')
+      '@styles': path.resolve(__dirname, './src/styles'),
+      '@utils': path.resolve(__dirname, './src/utils')
     }
   }
 });
