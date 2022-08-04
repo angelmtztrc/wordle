@@ -8,7 +8,13 @@ import { getDictionary } from '@utils/dictionary.util';
 import { getRandom } from '@utils/get-random.util';
 import { useRootDispatch, useRootSelector } from '@hooks';
 
-import { Header, Keyboard, CharactersGrid, GameStartModal } from '@molecules';
+import {
+  Header,
+  Keyboard,
+  CharactersGrid,
+  GameStartModal,
+  StatisticsModal
+} from '@molecules';
 
 const App = () => {
   const isDark = useRootSelector(state => state.isDarkMode);
@@ -18,7 +24,6 @@ const App = () => {
     (async function () {
       const words = await getDictionary();
       const randomWord = getRandom<string>(words);
-      dispatch(openStartGameModal());
       dispatch(setWord(randomWord.toUpperCase()));
     })();
   }, []);
@@ -39,6 +44,7 @@ const App = () => {
           <Keyboard />
         </div>
         <GameStartModal />
+        <StatisticsModal />
       </div>
       <ToastContainer
         position="top-right"

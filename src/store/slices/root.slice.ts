@@ -1,8 +1,13 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { answerValidation } from '@utils/answer-validation.util';
+import { toast } from 'react-toastify';
 
 type StateProps = {
+  matches: number;
+  wins: number;
   word: string;
+  hasLose: boolean;
+  hasWin: boolean;
   modal: 'start-game' | 'statistics' | 'none';
   answer: string[][];
   currentRow: number;
@@ -13,8 +18,12 @@ type StateProps = {
 const rootSlice = createSlice({
   name: 'root',
   initialState: {
+    matches: 0,
+    wins: 0,
     word: 'hello',
-    modal: 'none',
+    modal: 'start-game',
+    hasLose: false,
+    hasWin: false,
     answer: [[], [], [], [], []],
     currentRow: 0,
     validation: [{}, {}, {}, {}, {}],
@@ -42,8 +51,6 @@ const rootSlice = createSlice({
       return state;
     },
     submitWord: (state: StateProps) => {
-      // TODO: validate if is row end
-      // TODO: validate duplicate keys
       // TODO: handle if the user wins
       // TODO: handle if the user loses
 
@@ -56,8 +63,23 @@ const rootSlice = createSlice({
 
       state.validation[state.currentRow] = validation;
 
+      const hasWin = Object.values(validation).every(
+        value => value === 'right'
+      );
+      if (hasWin) {
+        toast.success('You win!');
+        state.matches = state.matches + 1;
+        state.wins = state.wins + 1;
+        state.modal = 'statistics';
+        state.hasWin = true;
+        return state;
+      }
+
       if (state.currentRow === 4) {
-        console.log('THIS IS THE END');
+        toast.info('You lose!');
+        state.matches = state.matches + 1;
+        state.hasLose = true;
+        state.modal = 'statistics';
         return state;
       }
 

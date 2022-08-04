@@ -15,9 +15,11 @@ const thirdRow = ['ENTER', 'Z', 'X', 'C', 'V', 'B', 'N', 'M', 'DELETE'];
 
 const Keyboard = ({}: KeyboardProps) => {
   const currentWord = useRootSelector(state => state.answer[state.currentRow]);
+  const hasWin = useRootSelector(state => state.hasWin);
   const dispatch = useRootDispatch();
 
   const handleClick = async (key: string) => {
+    if (hasWin) return;
     if (key === 'ENTER') {
       if (currentWord.length === 5) {
         const dictionary = await getDictionary();
