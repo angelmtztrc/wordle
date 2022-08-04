@@ -7,6 +7,7 @@ import { useRootDispatch, useRootSelector } from '@hooks';
 
 import { Keycap } from '@atoms';
 import { getDictionary } from '@utils/dictionary.util';
+import { toast } from 'react-toastify';
 
 const firstRow = ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P'];
 const secondRow = ['A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 'Ñ'];
@@ -24,11 +25,11 @@ const Keyboard = ({}: KeyboardProps) => {
           dispatch(submitWord());
           return;
         }
-        console.log('unexpected word');
+        toast.error('nonexistent word');
         return;
       }
 
-      console.log('not enough letters');
+      toast.error('not enough letters');
 
       return;
     }

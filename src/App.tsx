@@ -9,6 +9,7 @@ import { useRootDispatch, useRootSelector } from '@hooks';
 import { Header, Keyboard, CharactersGrid } from '@molecules';
 import { setWord } from '@store/slices/root.slice';
 import { getDictionary } from '@utils/dictionary.util';
+import { ToastContainer } from 'react-toastify';
 
 const App = () => {
   const isDark = useRootSelector(state => state.isDarkMode);
@@ -38,6 +39,17 @@ const App = () => {
           <Keyboard />
         </div>
       </div>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        toastClassName="bg-cultured-200 dark:bg-space-cadet-100 dark:text-white shadow"
+      />
     </div>
   );
 };
