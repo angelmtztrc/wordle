@@ -6,6 +6,7 @@ import {
 import { useRootDispatch, useRootSelector } from '@hooks';
 
 import { Keycap } from '@atoms';
+import { getDictionary } from '@utils/dictionary.util';
 
 const firstRow = ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P'];
 const secondRow = ['A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 'Ñ'];
@@ -15,11 +16,19 @@ const Keyboard = ({}: KeyboardProps) => {
   const currentWord = useRootSelector(state => state.answer[state.currentRow]);
   const dispatch = useRootDispatch();
 
-  const handleClick = (key: string) => {
+  const handleClick = async (key: string) => {
     if (key === 'ENTER') {
       if (currentWord.length === 5) {
-        dispatch(submitWord());
+        const dictionary = await getDictionary();
+        if (dictionary.includes(currentWord.join(''))) {
+          dispatch(submitWord());
+          return;
+        }
+        console.log('unexpected word');
+        return;
       }
+
+      console.log('not enough letters');
 
       return;
     }

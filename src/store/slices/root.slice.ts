@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { validateKey } from '@utils/validate-key.util';
+import { answerValidation } from '@utils/answer-validation.util';
 
 type StateProps = {
   word: string;
@@ -47,11 +47,19 @@ const rootSlice = createSlice({
       // TODO: handle if the user loses
 
       let validation: Record<string, string> = {};
-      state.answer[state.currentRow].forEach((key, keyIndex) => {
-        validation[keyIndex] = validateKey(state.word, key, keyIndex);
+      state.answer.forEach(row => {
+        if (row.length !== 0) {
+          validation = answerValidation(state.word, row);
+        }
       });
 
       state.validation[state.currentRow] = validation;
+
+      if (state.currentRow === 4) {
+        console.log('THIS IS THE END');
+        return state;
+      }
+
       state.currentRow += 1;
       return state;
     }

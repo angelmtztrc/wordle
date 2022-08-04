@@ -8,6 +8,7 @@ import { useRootDispatch, useRootSelector } from '@hooks';
 
 import { Header, Keyboard, CharactersGrid } from '@molecules';
 import { setWord } from '@store/slices/root.slice';
+import { getDictionary } from '@utils/dictionary.util';
 
 const App = () => {
   const isDark = useRootSelector(state => state.isDarkMode);
@@ -15,18 +16,9 @@ const App = () => {
 
   useEffect(() => {
     (async function () {
-      fetch(dictionary)
-        .then(res => res.text())
-        .then(text => {
-          const WORD_LENGTH_ALLOWED = 5;
-          const words = text
-            .split('\n')
-            .filter((word: string) => word.length === WORD_LENGTH_ALLOWED);
-
-          const randomWord = getRandom<string>(words);
-          dispatch(setWord(randomWord.toUpperCase()));
-        })
-        .catch();
+      const words = await getDictionary();
+      const randomWord = getRandom<string>(words);
+      dispatch(setWord(randomWord.toUpperCase()));
     })();
   }, []);
 
