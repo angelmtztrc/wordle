@@ -13,7 +13,6 @@ const StatisticsModal = ({ minutes, seconds }: StatisticsModalProps) => {
   const handleClose = () => {
     dispatch(closeStatisticsModal());
   };
-
   return (
     <Modal title="Estadisticas" open={isOpen} onClose={() => {}}>
       <div className="mt-6 flex justify-around">

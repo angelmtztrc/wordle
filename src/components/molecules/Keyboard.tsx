@@ -27,11 +27,11 @@ const Keyboard = ({}: KeyboardProps) => {
           dispatch(submitWord());
           return;
         }
-        toast.error('nonexistent word');
+        toast.error('palabra no encontrada en el diccionario');
         return;
       }
 
-      toast.error('not enough letters');
+      toast.error('insuficientes letras');
 
       return;
     }

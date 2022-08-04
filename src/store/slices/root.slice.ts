@@ -63,9 +63,6 @@ const rootSlice = createSlice({
       return state;
     },
     submitWord: (state: StateProps) => {
-      // TODO: handle if the user wins
-      // TODO: handle if the user loses
-
       let validation: Record<string, string> = {};
       state.answer.forEach(row => {
         if (row.length !== 0) {
@@ -79,7 +76,7 @@ const rootSlice = createSlice({
         value => value === 'right'
       );
       if (hasWin) {
-        toast.success('You win!');
+        toast.success('Has ganado!');
         state.matches = state.matches + 1;
         state.wins = state.wins + 1;
         state.modal = 'statistics';
@@ -88,7 +85,7 @@ const rootSlice = createSlice({
       }
 
       if (state.currentRow === 4) {
-        toast.info('You lose!');
+        toast.info('Has perdido! :c');
         state.matches = state.matches + 1;
         state.hasLose = true;
         state.modal = 'statistics';
